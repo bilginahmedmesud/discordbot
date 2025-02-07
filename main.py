@@ -1,21 +1,16 @@
 import os
-import time
 import discord
 from discord.ext import commands
 
 print("Melih botu v.1.0.0")
-time.sleep(0.5)
 
-intents = discord.Intents.all()  # Tüm intents'leri aktif et
+intents = discord.Intents.all()
 client = commands.Bot(command_prefix="!", intents=intents)
-
-Token = "MTMzNzM5MTA4NjQ0ODE1MjU3Ng.GUzXXh.IFhzEG0UBa7ajW32Ec8uoke2zsVaUhurJULiRY"
-Id = int(1022641335183876157)
 
 @client.event
 async def on_ready():
     try:
-        voice_channel = client.get_channel(Id)
+        voice_channel = client.get_channel(int(os.getenv('CHANNEL_ID')))
         if voice_channel:
             await client.change_presence(activity=discord.Activity(
                 type=discord.ActivityType.competing, 
@@ -31,4 +26,4 @@ async def on_ready():
     except Exception as e:
         print(f'Hata: {e}')
 
-client.run(Token)
+client.run(os.getenv('TOKEN'))
