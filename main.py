@@ -4,7 +4,9 @@ from discord.ext import commands
 
 print("Melih botu v.1.0.0")
 
-intents = discord.Intents.all()
+intents = discord.Intents.default()
+intents.voice_states = True
+intents.message_content = True
 client = commands.Bot(command_prefix="!", intents=intents)
 
 @client.event
